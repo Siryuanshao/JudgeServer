@@ -10,6 +10,7 @@ git gcc g++ openjdk-8-jdk cmake libseccomp-dev
 
 ### dependency
 https://github.com/redis/hiredis.git
+
 https://github.com/Siryuanshao/Judger.git --branch newnew
 
 ### setup
