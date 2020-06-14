@@ -1,0 +1,3 @@
+grant {
+    permission java.io.FilePermission "/test_case_base_dir", "read";
+};
