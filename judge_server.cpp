@@ -33,7 +33,7 @@
 #define JUDGER_DEBUG
 
 static volatile int process_count = 0;
-static bool stop = false;
+static volatile bool stop = false;
 
 
 static std::string judge_host;
@@ -159,6 +159,38 @@ int read_testcase(const std::string& path, std::vector<std::string>& vec)
             {
                 vec.push_back(test_id);
             }
+        }
+    }
+    return 0;
+}
+
+int read_testcase_spj(const std::string& path, std::vector<std::string>& vec)
+{
+    vec.clear();
+    std::set<std::string> container;
+    DIR* dirp = opendir(path.c_str());
+
+    if(!dirp) return -1;
+
+    struct dirent * dp;
+    while ((dp = readdir(dirp)) != NULL)
+    {
+        std::string file = dp->d_name;
+        struct stat s_buf;
+        stat((path + "/" + file).c_str(), &s_buf);
+        if(S_ISREG(s_buf.st_mode))
+            container.insert(file);
+    }
+    closedir(dirp);
+
+    if(container.find("spj") == container.end()) return -1;
+
+    for(const std::string& value : container)
+    {
+        if(value.rfind(".in") == value.size() - 3)
+        {
+            std::string test_id = value.substr(0, value.size() - 3);
+            vec.push_back(test_id);
         }
     }
     return 0;
@@ -294,7 +326,7 @@ void run_client(struct runRequest& req)
         write_solution(req.language, work_dir, req.sourcecode);
         compile(req.language, work_dir, work_dir);
         std::vector<std::string> test_set;
-        int success = read_testcase(test_case_dir, test_set);
+        int success = !req.isSpj ? read_testcase(test_case_dir, test_set) : read_testcase_spj(test_case_dir, test_set);
         if(success != -1)
         {
             judge_result tmp = {-1, -1, Accepted};
