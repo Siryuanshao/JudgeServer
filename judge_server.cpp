@@ -485,6 +485,7 @@ void sig_handle(int sig)
             stop = true;
             printf("receive sig for exit, process exit.\n");
             notify_server();
+            alarm(10);
             break;
         default:
             ;
