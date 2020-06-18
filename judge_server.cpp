@@ -362,7 +362,7 @@ void run_client(struct runRequest& req)
                     if(!req.isSpj)
                         ret = compare(output_file.c_str(), (test_case_id + ".out").c_str());
                     else
-                        ret = compare_spj((test_case_dir + "/" + "spj").c_str(), output_file.c_str(), (test_case_id + ".out").c_str());
+                        ret = compare_spj((test_case_dir + "/" + "spj").c_str(), (test_case_id + ".in").c_str(), (test_case_id + ".out").c_str(), output_file.c_str());
 
                     switch (ret)
                     {
