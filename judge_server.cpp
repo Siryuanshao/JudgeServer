@@ -202,21 +202,34 @@ void init_conf(const std::string& conf_file)
     reader.loadResource(!conf_file.empty() ? conf_file : "/etc/judge.conf");
 
     judge_host = reader.getProperty("judge_host");
+    assert(!judge_host.empty());
     judge_port = atoi(reader.getProperty("judge_port").c_str());
+    assert(judge_port);
     max_running = atoi(reader.getProperty("max_running").c_str());
+    assert(max_running);
     token = reader.getProperty("token");
+    assert(!token.empty());
 
     work_base_dir = reader.getProperty("work_base_dir");
+    assert(!work_base_dir.empty());
     test_case_base_dir = reader.getProperty("test_case_base_dir");
+    assert(!test_case_base_dir.empty());
 
     conf.host = reader.getProperty("redis_host");
+    assert(!conf.host.empty());
     conf.port = atoi(reader.getProperty("redis_port").c_str());
+    assert(conf.port);
     conf.problemChannel = reader.getProperty("problemChannel");
+    assert(!conf.problemChannel.empty());
     conf.contestChannel = reader.getProperty("contestChannel");
+    assert(!conf.contestChannel.empty());
 
     uploadUrl = reader.getProperty("uploadUrl");
+    assert(!uploadUrl.empty());
     uploadPath = reader.getProperty("uploadPath");
+    assert(!uploadPath.empty());
     uploadPort = atoi(reader.getProperty("uploadPort").c_str());
+    assert(uploadPort);
 }
 
 int init_server()
