@@ -408,7 +408,7 @@ void run_client(struct runRequest& req)
                 std::cout << "submission result : " << tmp.result << std::endl;
 #endif
 
-                if(tmp.result != Accepted)
+                if(tmp.result != Accepted && tmp.result != PresentationError)
                     break;
             }
             nlohmann::json data;
