@@ -14,7 +14,7 @@ namespace c_lang_config
         const std::string exe_name = "Main";
         const int max_cpu_time = 3000;
         const int max_real_time = 5000;
-        const int max_memory = 256 * 1024 * 1024;
+        const int max_memory = 512 * 1024 * 1024;
         const std::string compile_command = "/usr/bin/gcc -O2 -w -fmax-errors=5 -std=c99 %s -lm -o %s";
     }
     namespace run
@@ -34,7 +34,7 @@ namespace cpp_lang_config
         const std::string exe_name = "Main";
         const int max_cpu_time = 3000;
         const int max_real_time = 5000;
-        const int max_memory = 256 * 1024 * 1024;
+        const int max_memory = 512 * 1024 * 1024;
         const std::string compile_command = "/usr/bin/g++ -O2 -w -fmax-errors=5 -std=c++11 %s -lm -o %s";
     }
     namespace run
